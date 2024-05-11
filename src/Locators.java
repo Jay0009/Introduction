@@ -53,6 +53,19 @@ public class Locators
 		//Again with another email ID with css - using index
 		driver.findElement(By.cssSelector("input[type='text']:nth-child(3)")).sendKeys("John@gmail.com");
 		
+		//Click on phone number by traversing from parent to child only using tags
+		//when there is no attribute, no id, no name, no link, only tags are available
+		driver.findElement(By.xpath("//form/input[3]")).sendKeys("123456789");
+		
+		//Click on reset css - tagname.classname
+		driver.findElement(By.cssSelector("button.reset-pwd-btn")).click();
+		
+		Thread.sleep(3000);
+		
+		//Getting password forgot message by css - parentTagname Tagname.classname 
+		String tempPassword = driver.findElement(By.cssSelector("form p.infoMsg")).getText();
+		System.out.println(tempPassword);
+		
 		//Thread.sleep to check and see execution
 		Thread.sleep(5000);
 		
