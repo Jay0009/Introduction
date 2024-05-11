@@ -14,8 +14,21 @@ public class SelIntroduction
 		//Invoking chrome browser
 		WebDriver driver = new ChromeDriver();
 		
+		//get title of the Web page
+		driver.get("https://rahulshettyacademy.com");
+		String title = driver.getTitle();
+		System.out.println(title);
+		
+		//get current URL
+		String currentUrl = driver.getCurrentUrl();
+		System.out.println(currentUrl);
+		
 		//close window
-		driver.close();
+//		driver.close();
+		
+		//driver quit - this will quit the driver, it will close all browser.
+		driver.quit();
+		
 	
 	}
 
