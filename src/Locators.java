@@ -40,6 +40,9 @@ public class Locators
 		
 		//Forgot password
 		driver.findElement(By.linkText("Forgot your password?")).click();
+		
+		//Sleep for 2 seconds so that the form will shift before inputting the credentials to get password.
+		Thread.sleep(2000);
 				
 		//After forgot password, click on name by xpath
 		driver.findElement(By.xpath("//input[@placeholder='Name']")).sendKeys("John");
