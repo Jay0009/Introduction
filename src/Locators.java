@@ -1,6 +1,8 @@
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.xpath.XPath;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,6 +37,21 @@ public class Locators
 		//Get error message
 		String errorText = driver.findElement(By.cssSelector("p.error")).getText();
 		System.out.println(errorText);
+		
+		//Forgot password
+		driver.findElement(By.linkText("Forgot your password?")).click();
+				
+		//After forgot password, click on name by xpath
+		driver.findElement(By.xpath("//input[@placeholder='Name']")).sendKeys("John");
+		
+		//Click on email and enter email
+		driver.findElement(By.cssSelector("input[placeholder='Email']")).sendKeys("John@rsa.com");
+		
+		//deleting the inputted email by using clear and using different xpath - with index
+		driver.findElement(By.xpath("//input[@type='text'][2]")).clear();
+		
+		//Again with another email ID with css - using index
+		driver.findElement(By.cssSelector("input[type='text']:nth-child(3)")).sendKeys("John@gmail.com");
 		
 		//Thread.sleep to check and see execution
 		Thread.sleep(5000);
