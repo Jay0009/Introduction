@@ -1,5 +1,7 @@
 package automation;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,22 @@ public class UpdatedDropDown
 		
 		//get URL
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		
+		//Check if the checkbox is selected or not by using isSelected before clicking.
+		boolean seniorCitizenCheck = driver.findElement(By.cssSelector("input[id *= 'SeniorCitizenDiscount']")).isSelected();
+		System.out.println(seniorCitizenCheck);
+		
+		//Click on senior citizen checkbox using css/regular expresssion using *
+		driver.findElement(By.cssSelector("input[id *= 'SeniorCitizenDiscount']")).click();
+		
+		//Check if the checkbox is selected or not by using isSelected after clicking.
+		boolean seniorCitizen = driver.findElement(By.cssSelector("input[id *= 'SeniorCitizenDiscount']")).isSelected();
+		System.out.println(seniorCitizen);
+		
+		// Count the number of checkboxes present, find out locator which is common  to all the check boxes.
+		int totalCheckBoxes = driver.findElements(By.cssSelector("input[type = 'checkbox']")).size();
+		System.out.println(totalCheckBoxes);
+		
 		
 		//Click on passanger
 		driver.findElement(By.id("divpaxinfo")).click();
