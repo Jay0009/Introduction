@@ -18,6 +18,9 @@ public class Locators2
 		//Implicit wait to resolve the issue
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		
+		//Get password
+		String password = getPassword(driver);
+		
 		//go to webpage
 		driver.get("https://rahulshettyacademy.com/locatorspractice/");
 		
@@ -25,7 +28,8 @@ public class Locators2
 		driver.findElement(By.id("inputUsername")).sendKeys(name);
 		
 		//Find by name
-		driver.findElement(By.name("inputPassword")).sendKeys("rahulshettyacademy");
+		driver.findElement(By.name("inputPassword")).sendKeys(password);
+		
 		
 		//Click on checkbox by css selector tagname#id(value)
 		driver.findElement(By.cssSelector("input#chkboxTwo")).click();
@@ -56,6 +60,29 @@ public class Locators2
 		//Close driver
 		driver.close();
 
+	}
+	
+	public static String getPassword(WebDriver driver) throws InterruptedException
+	{
+		
+		//go to webpage
+		driver.get("https://rahulshettyacademy.com/locatorspractice/");
+		
+		//Click on forgot password
+		driver.findElement(By.linkText("Forgot your password?")).click();
+		
+		//Sleep for 2 seconds so that the form will shift before inputting the credentials to get password.
+		Thread.sleep(2000);
+				
+		//Click on reset css - tagname.classname
+		driver.findElement(By.cssSelector("button.reset-pwd-btn")).click();
+		
+		Thread.sleep(2000); // as page is moving
+		
+		//Getting password forgot message by css - parentTagname Tagname.classname 
+		String passwordText = driver.findElement(By.cssSelector("form p.infoMsg")).getText();
+		String password = passwordText.split("'")[1];
+		return password;
 	}
 
 }
