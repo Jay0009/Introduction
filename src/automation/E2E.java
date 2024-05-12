@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
-public class DynamicDropdown
+public class E2E
 {
 
 	public static void main(String[] args) throws InterruptedException
@@ -35,38 +35,27 @@ public class DynamicDropdown
 			Assert.assertFalse(true);
 		}
 		
-		Thread.sleep(5000);
 		
-		//Click on round trip
-		driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();
 		
-		Thread.sleep(2000);
+		//Click on senior citizen checkbox using css/regular expresssion using *
+		driver.findElement(By.cssSelector("input[id *= 'SeniorCitizenDiscount']")).click();
 		
-		//Check if round trip is selected
-		boolean roundTripSelected = driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).isSelected();
-		System.out.println(roundTripSelected);
-		
-		//Check if return day section is highlighted in round trip way
-		if (driver.findElement(By.id("Div1")).getAttribute("style").contains("1"))
-		{
-			System.out.println("Round trip is selected and return date is enabled");
-			Assert.assertTrue(true);
-		}
-		else 
-		{
-			Assert.assertTrue(false);
-		}
+		//Check if the checkbox is selected or not by using isSelected after clicking.
+		boolean seniorCitizen = driver.findElement(By.cssSelector("input[id *= 'SeniorCitizenDiscount']")).isSelected();
+		System.out.println(seniorCitizen);
+		Assert.assertTrue(seniorCitizen);
+
 		
 		//Click on From (city
 		driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT")).click();
+		
+		Thread.sleep(2000);
 		
 		//Select from/departure city
 		driver.findElement(By.xpath("//a[@value='BLR']")).click();
 		
 		Thread.sleep(2000);
 		
-		//Select to/destination city - with index
-//		driver.findElement(By.xpath("(//a[@value='MAA'])[2]")).click();
 		
 		//Select to/destination city - without index with parent child relationship xpath
 		driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'] //a[@value='MAA']")).click();
@@ -78,7 +67,34 @@ public class DynamicDropdown
 		driver.findElement(By.cssSelector(".ui-state-default.ui-state-highlight")).click();
 		
 		Thread.sleep(2000);
+		
+		//Click on passanger
+		driver.findElement(By.id("divpaxinfo")).click();
+		
+		Thread.sleep(2000);
+		
+		//Click on adult until it shows 5 adult, current value by default is 1
+		for (int i = 1; i < 5; i++)
+		{
+			driver.findElement(By.id("hrefIncAdt")).click();
+		}	
+		
+		//Click on done
+		driver.findElement(By.id("btnclosepaxoption")).click();
+		
+		//Click on passenger again to get the number of passengers selected.
+		String totalPassenders = driver.findElement(By.id("divpaxinfo")).getText();
+		System.out.println(totalPassenders);
+		Assert.assertEquals(totalPassenders, "5 Adult");
+		
+		Thread.sleep(2000);
+		
+		//Search flights
+		driver.findElement(By.id("ctl00_mainContent_btn_FindFlights")).click();
+		
+		Thread.sleep(2000);
 		driver.close();
+
 
 	}
 
