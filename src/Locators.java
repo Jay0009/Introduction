@@ -63,11 +63,30 @@ public class Locators
 		//Click on reset css - tagname.classname
 		driver.findElement(By.cssSelector("button.reset-pwd-btn")).click();
 		
-		Thread.sleep(3000);
+		Thread.sleep(2000); // as page is moving
 		
 		//Getting password forgot message by css - parentTagname Tagname.classname 
 		String tempPassword = driver.findElement(By.cssSelector("form p.infoMsg")).getText();
 		System.out.println(tempPassword);
+		
+		//Now lets log in with username and password and by clickcing on the checkbox
+		
+		//Click on go to log in
+		driver.findElement(By.className("go-to-login-btn")).click();
+		
+		Thread.sleep(2000); // as page is moving
+		
+		//Username by css - tagname#id
+		driver.findElement(By.cssSelector("input#inputUsername")).sendKeys("rahul");
+		
+		//Password by css - tagname[attributeName *= 'Attr']
+		driver.findElement(By.cssSelector("input[type*='pass']")).sendKeys("rahulshettyacademy");
+		
+		//Click on checkbox by css selector tagname#id(value)
+		driver.findElement(By.cssSelector("input#chkboxTwo")).click();
+		
+		//Click on sign in button xpath
+		driver.findElement(By.xpath("//button[contains(@class,'submit')]")).click();
 		
 		//Thread.sleep to check and see execution
 		Thread.sleep(5000);
