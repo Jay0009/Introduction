@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Base
 {
@@ -20,7 +22,9 @@ public class Base
 		WebDriver driver = new ChromeDriver();
 		
 		//9. implicit wait
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		//10. Explicit wait
+		WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
 		
 		
 		//1. Declare itemsNeeded
@@ -38,7 +42,9 @@ public class Base
 		//5. Proceed to checkout
 		driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
 		
-		//6. input promo code
+		//12.explicit wait until visibility of element located.
+		w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input.promoCode")));
+		//6. input promo code 
 		driver.findElement(By.cssSelector("input.promoCode")).sendKeys("rahulshettyacademy");
 		
 		//7. click on promo button
@@ -46,6 +52,9 @@ public class Base
 		
 		//8. check if promo aplied message is visible - please note that promo info visible after 
 		// few seconds.
+		
+		//11. explicit wait until visibility of element located.
+		w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.promoInfo")));
 		String promoMessage = driver.findElement(By.cssSelector("span.promoInfo")).getText();
 		System.out.println(promoMessage);
 		
