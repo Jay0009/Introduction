@@ -1,6 +1,7 @@
 package section10;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -22,6 +23,14 @@ public class AjaxMouseInteractions
 		Actions a = new Actions(driver);
 		a.moveToElement(driver.findElement(By.id("nav-link-accountList-nav-line-1"))).build()
 		.perform();
+		
+		//4. write hello in search box
+		a.moveToElement(driver.findElement(By.id("twotabsearchtextbox"))).click()
+		.keyDown(Keys.SHIFT).sendKeys("hello").doubleClick().build().perform();
+		
+		//5. right click on the Hello-sign in-Accounts and list
+		a.moveToElement(driver.findElement(By.id("nav-link-accountList-nav-line-1"))).contextClick()
+		.build().perform();
 		
 		Thread.sleep(3000);
 		driver.close();
