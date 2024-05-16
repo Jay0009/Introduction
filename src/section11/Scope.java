@@ -1,6 +1,9 @@
 package section11;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,8 +35,17 @@ public class Scope
 		int firstColumnDriverCount = firstColumnDriver.findElements(By.tagName("a")).size();
 		System.out.println(firstColumnDriverCount);
 		
+		//6. click on each link in the firstColumnDriver and check if pages are opening.
+		for (int i = 1; i < firstColumnDriverCount; i++)
+		{
+			List<WebElement> firstColumnLinks = firstColumnDriver.findElements(By.tagName("a"));
+			String clickOnLinkTab = Keys.chord(Keys.COMMAND, Keys.ENTER);
+			firstColumnLinks.get(i).sendKeys(clickOnLinkTab); //this will move the mouse to next page.
+		}
+		
+		
 		Thread.sleep(3000);
-		driver.close();
+		driver.quit();
 
 	}
 
