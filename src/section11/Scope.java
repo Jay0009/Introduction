@@ -1,6 +1,8 @@
 package section11;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -41,6 +43,16 @@ public class Scope
 			List<WebElement> firstColumnLinks = firstColumnDriver.findElements(By.tagName("a"));
 			String clickOnLinkTab = Keys.chord(Keys.COMMAND, Keys.ENTER);
 			firstColumnLinks.get(i).sendKeys(clickOnLinkTab); //this will move the mouse to next page.
+		}
+		
+		//7. Get the title of each and every page
+		Thread.sleep(5000); // wait to load all window handles.
+		Set<String> window = driver.getWindowHandles();
+		Iterator<String> it = window.iterator();
+		while (it.hasNext())
+		{
+			WebDriver currentTab = driver.switchTo().window(it.next());
+			System.out.println(currentTab.getTitle());
 		}
 		
 		
