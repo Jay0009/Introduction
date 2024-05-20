@@ -46,7 +46,10 @@ public class MultipleTabsOrWindow
 		File file = nameEditbox.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(file, new File("nameEditbox.png"));
 		
-		
+		//S.15.127- find length and width of nameEditBox
+		int height = nameEditbox.getRect().getDimension().getHeight();
+		int width = nameEditbox.getRect().getDimension().getWidth();
+		System.out.println("Height of the nameEditBox is: " + height +" & width is: " + width);
 		
 		Thread.sleep(2000);
 		driver.quit();
